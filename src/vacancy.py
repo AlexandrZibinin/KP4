@@ -7,10 +7,11 @@ class Vacancy:
         self.salary_from = self.is_salary(salary)
         self.salary_to = self.is_salary(salary)
         self.snippet = snippet
-    # @classmethod
-    # def from_dict(cls, data):
-    #     data = is_salary(data)
-    #     return cls(**data)
+
+    @classmethod
+    def from_dict(cls, data):
+        data = is_salary(data)
+        return cls(**data)
 
 
     def is_salary(self, value):

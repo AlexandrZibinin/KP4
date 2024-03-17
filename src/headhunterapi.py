@@ -1,3 +1,4 @@
+import json
 from abc import ABC, abstractmethod
 import requests
 
@@ -37,14 +38,9 @@ class HeadHunterAPI(Connect):
         """Получение списка вакансий с hh.ru - список словарей"""
         params = self.get_params(keyword=input('Введите название вакансии\n'))
         response = requests.get(self.__url, params).json()['items']
-        result = {}
-        res = []
+        result = []
         for value in response:
-            result['name'] = value['name']
-            result['url'] = value['url']
-            result['salary'] = value['salary']
-            result['snippet'] = value['snippet']
-            res.append(result)
-        return res
+            result.append(value)
+        return result
 
 

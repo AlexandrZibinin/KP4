@@ -6,12 +6,14 @@ def user_interface():
     return vacancies
 #
 
-# print(user_interface())
-data = user_interface()
-print(type(data))
+print(user_interface())
+# from_hh = user_interface()
+# for i in from_hh:
+#     print(i)
+
 # vacancies = []
-# for value in data:
-#     vacancies.append(Vacancy(**value))
+# for value in from_hh:
+#     res = Vacancy(value)
+#     vacancies.append(res)
 #
-# vac = Vacancy(**data)
-# print(vac)
+# print(vacancies)
