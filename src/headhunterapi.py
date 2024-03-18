@@ -1,4 +1,3 @@
-import json
 from abc import ABC, abstractmethod
 import requests
 
@@ -22,21 +21,22 @@ class HeadHunterAPI(Connect):
     def __init__(self):
         self.__url = 'https://api.hh.ru/vacancies'
 
-    def get_params(self, keyword):
+    def get_params(self, keyword, count_vacancies, salary):
         """метод для подготовки параметров для обращения к сервису
         :param :keyword значение для поиска в полях вакансии
         """
         params = {
             'page': 0,
-            'per_page': 90,
-            'text': keyword
+            'per_page': count_vacancies,
+            'text': keyword,
+            'salary': salary
 
         }
         return params
 
-    def get_vacancy(self, keyword):
+    def get_vacancy(self, keyword, count_vacancies, salary):
         """Получение списка вакансий с hh.ru - список словарей"""
-        params = self.get_params(keyword)
+        params = self.get_params(keyword, count_vacancies, salary)
         response = requests.get(self.__url, params).json()
         vacancies = response['items']
         return vacancies

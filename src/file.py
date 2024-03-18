@@ -1,6 +1,7 @@
 import json
 from abc import ABC, abstractmethod
 
+
 class File(ABC):
     @abstractmethod
     def save_data(self):
