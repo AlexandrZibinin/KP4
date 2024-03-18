@@ -28,19 +28,15 @@ class HeadHunterAPI(Connect):
         """
         params = {
             'page': 0,
-            'per_page': 10,
+            'per_page': 90,
             'text': keyword
 
         }
         return params
 
-    def get_vacancy(self):
+    def get_vacancy(self, keyword):
         """Получение списка вакансий с hh.ru - список словарей"""
-        params = self.get_params(keyword=input('Введите название вакансии\n'))
-        response = requests.get(self.__url, params).json()['items']
-        result = []
-        for value in response:
-            result.append(value)
-        return result
-
-
+        params = self.get_params(keyword)
+        response = requests.get(self.__url, params).json()
+        vacancies = response['items']
+        return vacancies

@@ -18,15 +18,14 @@ class File(ABC):
 class JSONsaver(File):
 
     def save_data(self, value):
-        """сохраняет результату в JSON файл"""
-        to_json = {'result': value}
-        with open('vacancy_json.json', mode='w') as file:
-            json.dump(to_json)
-        return file
+        """сохраняет результат в JSON файл"""
+        with open('vacancy_json.json', 'w') as file:
+            json.dump(value, file)
 
     def get_data(self):
         pass
 
     def del_data(self):
-        pass
-
+        """очистка файла JSON"""
+        with open("vacancy_json.json", "w") as f:
+            pass
