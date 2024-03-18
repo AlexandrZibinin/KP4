@@ -27,10 +27,10 @@ class Vacancy:
     def is_salary(value):
         """метод валидации salary"""
         if value is None:
-            return 'Значение не указано'
+            return 0
         else:
-            return (f'{value.get('from', 0) if value.get('from') is not None else "Неизвестно"} - '
-                    f'{value.get('to') if value.get('to') is not None else "Неизвестно"}')
+            return (f'{value.get('from', 0) if value.get('from') is not None else 0} - '
+                    f'{value.get('to') if value.get('to') is not None else 0}')
 
     def __str__(self):
         return (f'Название вакансии: {self.name}, '
