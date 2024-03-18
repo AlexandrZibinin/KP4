@@ -1,28 +1,44 @@
-
 class Vacancy:
 
     def __init__(self, name, url, salary, snippet):
         self.name = name
         self.url = url
-        self.salary_from = self.is_salary(salary)
-        self.salary_to = self.is_salary(salary)
+        self.salary = self.is_salary(salary)
         self.snippet = snippet
-    # @classmethod
-    # def from_dict(cls, data):
-    #     data = is_salary(data)
-    #     return cls(**data)
 
+    @classmethod
+    def from_dict(cls, data):
+        """создание экземпляра класса"""
+        return cls(**data)
 
-    def is_salary(self, value):
+    @staticmethod
+    def get_obj_lst(data):
+        """метод создает список экземпляров класса с вакансиями"""
+        vacancy_ex = []
+        for value in data:
+            vac_data = {
+                'name': value.get('name'), 'url': value.get('url'), 'salary': value.get('salary'),
+                'snippet': value.get('snippet')
+            }
+            vacancy_ex.append(Vacancy.from_dict(vac_data))
+        return vacancy_ex
+
+    @staticmethod
+    def is_salary(value):
+        """метод валидации salary"""
         if value is None:
-            return 'Значение не указано'
+            return 0
         else:
-            return value
-        return 0
+            return (f'{value.get('from', 0) if value.get('from') is not None else 0} - '
+                    f'{value.get('to') if value.get('to') is not None else 0}')
 
     def __str__(self):
-        return f'{self.name}, {self.url}, {self.salary_from}-{self.salary_to}, {self.snippet}'
+        return (f'Название вакансии: {self.name}, '
+                f'Ссылка: {self.url}, '
+                f'Зарплата: {self.salary}, '
+                f'Описание:{self.snippet.get('requirement', 'responsibility')}')
 
-
-
-
+    def __lt__(self, other):
+        """метод сравнения зарплат"""
+        max_salary = max(int(self.salary.split(' ')))
+        return max_salary < other
