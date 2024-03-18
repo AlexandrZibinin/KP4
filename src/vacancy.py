@@ -1,29 +1,25 @@
-
 class Vacancy:
 
-    def __init__(self, name, url, salary, snippet):
+    def __init__(self, name, url, salary, snippet, **kwargs):
         self.name = name
         self.url = url
-        self.salary_from = self.is_salary(salary)
-        self.salary_to = self.is_salary(salary)
+        self.salary = self.is_salary(salary)
         self.snippet = snippet
 
     @classmethod
     def from_dict(cls, data):
-        data = is_salary(data)
+        """создание экземпляра класса"""
         return cls(**data)
 
-
-    def is_salary(self, value):
+    @staticmethod
+    def is_salary(value):
+        """метод валидации salary"""
         if value is None:
             return 'Значение не указано'
         else:
-            return value
-        return 0
+            return f'{value['from']} - {value['to']}'
 
     def __str__(self):
-        return f'{self.name}, {self.url}, {self.salary_from}-{self.salary_to}, {self.snippet}'
-
-
+        return f'{self.name}, {self.url}, {self.salary}, {self.snippet}'
 
 
